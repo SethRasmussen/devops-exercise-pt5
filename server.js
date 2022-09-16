@@ -17,7 +17,7 @@ rollbar.log('Hello world!')
 
 const students = ['Jimmy', 'Timothy', 'Jimothy']
 
-app.get('/', (req, res) => {
+app.delete('/api/students/:index', (req, res) => {
     try {
         nonExistentFunction();
       } catch (error) {
