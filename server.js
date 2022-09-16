@@ -18,6 +18,17 @@ rollbar.log('Hello world!')
 const students = ['Jimmy', 'Timothy', 'Jimothy']
 
 app.get('/', (req, res) => {
+    try {
+        nonExistentFunction();
+      } catch (error) {
+        console.error(error);
+        rollbar.error("non-existent function")
+        // expected output: ReferenceError: nonExistentFunction is not defined
+        // Note - error messages will vary depending on browser
+      }
+})
+
+app.get('/', (req, res) => {
     rollbar.info("Homepage loaded succesfully")
     res.sendFile(path.join(__dirname, '/index.html'))
 })
@@ -35,6 +46,7 @@ app.post('/api/students', (req, res) => {
    })
 
    try {
+    rollbar.info("added student successfully")
        if (index === -1 && name !== '') {
            students.push(name)
            res.status(200).send(students)
