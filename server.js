@@ -23,8 +23,7 @@ app.get('/', (req, res) => {
       } catch (error) {
         console.error(error);
         rollbar.error("non-existent function")
-        // expected output: ReferenceError: nonExistentFunction is not defined
-        // Note - error messages will vary depending on browser
+        res.status(400).send(students)
       }
 })
 
