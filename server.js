@@ -18,10 +18,12 @@ rollbar.log('Hello world!')
 const students = ['Jimmy', 'Timothy', 'Jimothy']
 
 app.get('/', (req, res) => {
+    rollbar.info("Homepage loaded succesfully")
     res.sendFile(path.join(__dirname, '/index.html'))
 })
 
 app.get('/api/students', (req, res) => {
+    rollbar.info("all students sent successfully")
     res.status(200).send(students)
 })
 
@@ -42,6 +44,7 @@ app.post('/api/students', (req, res) => {
            res.status(400).send('That student already exists.')
        }
    } catch (err) {
+       rollbar.critical("Hacker has gone and done it now.") 
        console.log(err)
    }
 })
